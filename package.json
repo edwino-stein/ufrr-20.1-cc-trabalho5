@@ -1,0 +1,15 @@
+{
+  "name": "ufrr-20.1-cc-trabalho5",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "tape ${T:-tests/*.test.js} | tap-spec"
+  },
+  "author": "Edwino Stein",
+  "license": "MIT",
+  "devDependencies": {
+    "tap-spec": "^5.0.0",
+    "tape": "^5.0.1"
+  }
+}
