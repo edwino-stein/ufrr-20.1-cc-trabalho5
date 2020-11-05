@@ -3,6 +3,7 @@ const isNode = typeof(module) !== 'undefined' && typeof(module.exports) !== 'und
 
 if(isNode){
     var Producao = require('./Producao.js');
+    var Derivacao = require('./Derivacao.js');
 }
 
 /**
@@ -94,6 +95,13 @@ class Gramatica {
 
         return producoes[indice];
     }
+
+    /**
+     * Cria uma instância de Derivar com base na gramática
+     * @param  {string} entrada String de entrada para derivação
+     * @return {Derivacao}
+     */
+    derivar (entrada) { return new Derivacao(entrada, this); }
 
     /**
      * Cria e inicializa uma instância de Gramatica
