@@ -10,23 +10,29 @@ class Producao {
      * Construtor da classe
      * @param {string} cabeca Símbolo não terminal que corresponde a cabeça da produção
      * @param {[string]} corpo  Lista de símbolos que correspondem ao corpo da produção
+     * @param {string} vazio  Símbolo que representa o vazio na gramática
      */
-    constructor(cabeca, corpo) {
+    constructor(cabeca, corpo, vazio) {
 
-        if(typeof(cabeca) !== 'string' || cabeca.length == 0) {
-            throw 'A cabeça da produção deve ser uma string com tamanho 1';
+        if(typeof(cabeca) !== 'string' || cabeca.length === 0) {
+            throw 'A cabeça da produção deve ser uma string não vazia';
         }
 
         if(typeof(corpo) !== 'object' || !(corpo instanceof Array)) {
             throw 'O corpo da produção deve ser uma lista de strings'
         }
 
-        if(!corpo.every(i => typeof(i) === 'string' && i.length <= 1)) {
-            throw 'O corpo da produção deve ser uma lista de strings'
+        if(corpo.length === 0 || !corpo.every(i => typeof(i) === 'string')) {
+            throw 'O corpo da produção deve ser uma lista de strings não vazia';
+        }
+
+        if(typeof(vazio) !== 'string' || vazio.length !== 1) {
+            throw 'O símbolo vazio deve ser uma string não vazia de tamanho 1';
         }
 
         this._cabeca = cabeca;
         this._corpo = corpo;
+        this._vazio = vazio;
     }
 
     /**
@@ -40,6 +46,20 @@ class Producao {
      * @return {[string]}
      */
     get corpo() { return this._corpo; }
+
+    /**
+     * Retorna os símbolos da string concatenados em uma única string
+     * @return {string}
+     */
+    get corpoStr() { return this._corpo.join(''); }
+
+    /**
+     * Retorna a string completa da produção no formato A -> B
+     * @return {string}
+     */
+    get comoString() {
+        return [ this.cabeca, ' -> ', this.corpoStr ].join('');
+    }
 
     /**
      * Aplica a produção na string de entrada pela esquerda na primeira ocorrência
@@ -73,7 +93,7 @@ class Producao {
      */
     aplicar(entrada, posicao) {
         if(posicao < 0 || posicao >= entrada.length) return entrada;
-        if(entrada[posicao] !== this.cabeca) return entrada;
+        if(entrada.substr(posicao, this.cabeca.length) !== this.cabeca) return entrada;
         return this._aplicar(entrada, posicao);
     }
 
@@ -87,8 +107,8 @@ class Producao {
         entrada = [ ...entrada ];
         return [
             ...entrada.slice(0, posicao),
-            ...this.corpo,
-            ...entrada.slice(posicao + 1),
+            ...this.corpo.filter(s => s !== this._vazio),
+            ...entrada.slice(posicao + this.cabeca.length),
         ].join('');
     }
 }
