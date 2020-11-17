@@ -29,6 +29,7 @@ class LL1 {
         }
 
         // Adiciona o símbolo de fim de cadeia ao final da entrada
+        let entradaPos = 0;
         entrada.push(this._fdc);
 
         // Cria a pilha com o símbolo inicial e o símbolo de fim de cadadeia
@@ -46,6 +47,8 @@ class LL1 {
                 // Desempilha o símbolo
                 pilha.shift();
 
+                entradaPos++;
+
                 // Remove o símbolo do inicio da entrada
                 entrada.shift();
 
@@ -56,8 +59,11 @@ class LL1 {
             // Se o topo for um símbolo terminal diferente do atual da entrada,
             // gera erro
             if (!this._gramatica.simboloEhNaoTerminal(pilha[0])) {
-                // OBS: Não encontrei um caso que caia nesta condição
-                throw 'Erro sintático';
+                throw {
+                    posicao: entradaPos,
+                    esperado: pilha[0],
+                    encontrado: entrada[0]
+                };
             }
 
             // Busca na tabela sintática a produção que deve ser aplicada
@@ -67,6 +73,7 @@ class LL1 {
             if (prod === null || prod === undefined) {
                 // Relata os símbolos esperados e o encontrado
                 throw {
+                    posicao: entradaPos,
                     esperado: LL1._primeiros(pilha[0], this._gramatica),
                     encontrado: entrada[0]
                 };

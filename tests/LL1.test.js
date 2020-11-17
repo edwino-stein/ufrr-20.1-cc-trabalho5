@@ -380,6 +380,12 @@ tape('Verificar análise', (t) => {
         'Não deve reconhecer a entrada "i+a"'
     );
 
+    t.throws(
+        () => ll1.analisar('(i+i)*(i'),
+        (e) => typeof(e) === 'object',
+        'Não deve reconhecer a entrada "(i+i)*(i"'
+    );
+
     t.end();
 });
 
