@@ -1,0 +1,101 @@
+#container {
+    padding-top: 20px;
+}
+
+#container .grid .column:last-child{
+    padding-left: 0
+}
+
+.label {
+    display: block;
+    margin: 0 0 .28571429rem 0;
+    color: rgba(0,0,0,.87);
+    font-size: .92857143em;
+    font-weight: 700;
+    text-transform: none;
+}
+
+.monospaced {
+    font-family: monospace;
+}
+
+#def-gramatica {
+    margin-top: 11px;
+    text-align: center;
+}
+
+#expressao p {
+    display: block;
+    font-weight: 400;
+    padding: 0;
+    margin: 0;
+    font-size: 0.9rem;
+    line-height: 1.2em;
+    color: rgba(0,0,0,.6);
+    margin-top: 3px;
+}
+
+#source-code {
+    font-family: monospace;
+}
+
+#left-col {
+    overflow-y: auto;
+}
+
+#message .header {
+    margin-bottom: 1rem;
+}
+
+#message .body p {
+    margin: 0;
+}
+
+#arvore {
+    text-align: center;
+    display: none;
+    margin: 1em 0;
+}
+
+#arvore .svg {
+    overflow: auto;
+}
+
+#arvore .label {
+    text-align: left;
+}
+
+svg text {
+    padding:0.7em;
+    padding-left:0.70em;
+    padding-right:0.70em;
+    font-family: monospace;
+    font-weight: 700;
+}
+
+svg g.collapsed g text {
+    padding-left:0.5ex;
+    padding-right:0.5ex;
+}
+svg line,
+svg polyline {
+    font-size:1em; /*height not honored here by WebKit*/
+}
+svg polyline {
+    fill:none;
+}
+
+.shortTree line,
+.shortTree polyline {
+    font-size:0.25em;
+}
+.tallTree line,
+.tallTree polyline {
+    font-size:2em;
+}
+
+#footer {
+    text-align: center;
+    font-size: larger;
+    padding: 7px 0;
+}

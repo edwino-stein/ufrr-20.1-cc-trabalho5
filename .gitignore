@@ -1,4 +1,8 @@
-app/Automato.js
+app/ArvoreSintatica.js
+app/Derivacao.js
+app/Gramatica.js
+app/Producao.js
+app/LL1.js
 
 # Created by https://www.toptal.com/developers/gitignore/api/node,macos,linux,windows
 # Edit at https://www.toptal.com/developers/gitignore?templates=node,macos,linux,windows
