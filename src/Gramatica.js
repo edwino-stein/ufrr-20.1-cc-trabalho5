@@ -1,9 +1,9 @@
 // Verifica se está rodando pelo Node.js
-const isNode = typeof(module) !== 'undefined' && typeof(module.exports) !== 'undefined';
+var isNode = typeof(module) !== 'undefined' && typeof(module.exports) !== 'undefined';
 
 if(isNode){
-    var Producao = require('./Producao.js');
-    var Derivacao = require('./Derivacao.js');
+    Producao = require('./Producao.js');
+    Derivacao = require('./Derivacao.js');
 }
 
 /**

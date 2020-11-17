@@ -1,5 +1,5 @@
 // Verifica se está rodando pelo Node.js
-const isNode = typeof(module) !== 'undefined' && typeof(module.exports) !== 'undefined';
+var isNode = typeof(module) !== 'undefined' && typeof(module.exports) !== 'undefined';
 
 /**
  * Classe responsável por genrenciar a derivação conforme vai sendo aplicado as
