@@ -24,7 +24,7 @@ tape('Verificar o construtor de ArvoreSintatica', (t) => {
     t.end();
 });
 
-tape('Verificar o parsear lista de produções', (t) => {
+tape('Verificar o parsear lista de produções criando pela esquerda', (t) => {
 
     const gram = Gramatica.criar({
             'E': ['TF'],
@@ -36,6 +36,7 @@ tape('Verificar o parsear lista de produções', (t) => {
         'e'
     );
 
+    // Produz i+i
     const prods = [
         gram.producao('E', 0),
         gram.producao('T', 0),
@@ -56,6 +57,42 @@ tape('Verificar o parsear lista de produções', (t) => {
         simbolosPreOrdem,
         [ ...'ETGiUeF+TGiUeFe' ],
         'Os símbolos devem estar na ordem esperada quando a arvore é percorrida em pré ordem'
+    );
+
+    t.end();
+});
+
+tape('Verificar o parsear lista de produções criando pela direita', (t) => {
+
+    const gram = Gramatica.criar(
+        {
+            'E': ['E+M', 'M'],
+            'M': ['MxP', 'P'],
+            'P': ['(E)', 'v']
+        },
+        '#'
+    );
+
+    // Produz v+v
+    const prods = [
+        gram.producao('E', 0),
+        gram.producao('M', 1),
+        gram.producao('P', 1),
+        gram.producao('E', 1),
+        gram.producao('M', 1),
+        gram.producao('P', 1)
+    ];
+
+    const arvore = ArvoreSintatica.parsearProducoes(prods, gram, 'd');
+    const simbolosPosOrdem = [];
+
+    // console.log(arvore);
+    arvore.posOrdem((no) => simbolosPosOrdem.push(no.simbolo));
+
+    t.deepEqual(
+        simbolosPosOrdem,
+        [ ...'EMPv+EMPv' ],
+        'Os símbolos devem estar na ordem esperada quando a arvore é percorrida em pos ordem'
     );
 
     t.end();
