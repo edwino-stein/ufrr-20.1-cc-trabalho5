@@ -45,7 +45,7 @@ class Producao {
      * Retorna a lista de símbolos do corpo
      * @return {[string]}
      */
-    get corpo() { return this._corpo; }
+    get corpo() { return [ ...this._corpo ]; }
 
     /**
      * Retorna os símbolos da string concatenados em uma única string
